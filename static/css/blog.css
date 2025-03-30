@@ -1,0 +1,30 @@
+/* تحسين نموذج التعليق */
+.comment-form {
+    max-width: 600px;
+    margin: 'auto';
+}
+
+/* جعل صندوق التعليق يتوسع تلقائيًا عند الكتابة */
+.auto-expand {
+    min-height: 40px;
+    max-height: 200px;
+    overflow-y: hidden;
+    resize: none;
+    transition: height 0.2s ease-in-out;
+}
+
+/* تحسين مظهر الأزرار */
+.boxed-btn3 {
+    background: #ff5a5f;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    border: none;
+    display: inline-block;
+}
+
+.boxed-btn3:hover {
+    background: #e0484d;
+    color: white;
+}

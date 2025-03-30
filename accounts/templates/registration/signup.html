@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block body %}
+    <!-- bradcam_area -->
+    <div class="bradcam_area bradcam_bg_1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text">
+                        <h3>Create a New Account</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ bradcam_area -->
+
+    <div class="job_details_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mx-auto">
+                    <div class="apply_job_form white-bg p-4 shadow-sm" style="border-radius: 10px;">
+                        <h4 class="mb-4 text-center">Join Us Today!</h4>
+
+                        {% if form.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                There was an error with your submission. Please correct the errors below.
+                            </div>
+                        {% endif %}
+
+                        <form method="post">
+                            {% csrf_token %}
+                            {% bootstrap_form form %}
+                            <div class="form-group mt-4 d-flex justify-content-between">
+                                <input type="submit" value="Sign Up" class="boxed-btn3 w-100 mr-2 mb-3" />
+                            </div>
+                        </form>
+
+                        <p class="text-center mt-3">
+                            Already have an account? <a href="{% url 'login' %}" class="text-success font-weight-bold">Login here</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

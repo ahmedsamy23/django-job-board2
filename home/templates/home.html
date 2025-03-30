@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+    <!-- CSS here -->
+
+    <!-- slider_area_start -->
+    <div class="slider_area">
+        <div class="single_slider d-flex align-items-center slider_bg_1">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-7 col-md-6">
+                        <div class="slider_text">
+                            <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">
+                                Find Your Dream Job
+                            </h3>
+                            <p class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".4s">
+                                Browse thousands of job listings in different fields.
+                            </p>
+                            <div class="sldier_btn wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
+                                <a href="{% url 'jobs:job_list' %}" class="boxed-btn3">Browse Jobs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider_area_end -->
+
+<!-- popular_category_area_start -->
+<div class="popular_catagory_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section_title mb-40">
+                    <h3>Popular Categories</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for category in categories %}
+            <div class="col-lg-4 col-xl-3 col-md-6">
+                <div class="single_catagory">
+                    <a href="{% url 'jobs:job_list' %}?category={{ category.id }}">
+                        <h4>{{ category.name }}</h4>
+                        <p><span>{{ category.job_set.count }}</span> Available Jobs</p>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- popular_category_area_end -->
+    <!-- popular_category_area_end -->
+
+    <!-- featured_jobs_area_start -->
+
+    <!-- featured_jobs_area_end -->
+
+    <!-- job_listing_area_start -->
+    <div class="job_listing_area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="section_title">
+                        <h3>Latest Jobs</h3>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="brouse_job text-right">
+                        <a href="{% url 'jobs:job_list' %}" class="boxed-btn4">Browse More Jobs</a>
+                    </div>
+                </div>
+            </div>
+            <div class="job_lists">
+                <div class="row">
+                    {% for job in jobs_list %}
+                        
+                    <div class="col-lg-12 col-md-12">
+                        <div class="single_jobs white-bg d-flex justify-content-between">
+                            <div class="jobs_left d-flex align-items-center">
+                                <div class="thumb">
+                                    <a href="{% url 'jobs:job_detail' job.slug %}"><img src="{{ job.image.url }}" alt="{{ job.title }}" class="job-image"></a>
+                                </div>
+                                
+                                <div class="jobs_conetent">
+                                    <a href="{% url 'jobs:job_detail' job.slug %}"><h4>{{ job.title }}</h4></a>
+                                    <p>{{ job.description|truncatewords:20 }}</p>
+                                    <div class="links_locat d-flex align-items-center">
+                                        
+                                        {% if job.job_type == 'Full Time' %}
+                                            <span class="badge badge-success">Full Time</span>
+                                        {% elif job.job_type == 'Part Time' %}
+                                            <span class="badge badge-warning">Part Time</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="jobs_right">
+                                <div class="apply_now">
+                                    <a href="{% url 'jobs:job_detail' job.slug %}" class="boxed-btn3">Apply Now</a>
+                                </div>
+                                <p>Published On: {{ job.published_at|date:"d M Y" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <p class="text-center">No jobs available at the moment.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- job_listing_area_end -->
+
+    <!-- testimonial_area_start -->
+  
+    <!-- testimonial_area_end -->
+
+     <!-- Looking for a Job? / Looking for an Expert? Section (Moved to Bottom) -->
+     <div class="job_searcing_wrap overlay mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 offset-lg-1 col-md-6">
+                    <div class="searching_text">
+                        <h3>Looking for a Job?</h3>
+                        <p>We provide online instant cash loans with quick approval</p>
+                        <a href="{% url 'jobs:job_list' %}" class="boxed-btn3">Browse Job</a>
+                    </div>
+                </div>
+                <div class="col-lg-5 offset-lg-1 col-md-6">
+                    <div class="searching_text">
+                        <h3>Looking for an Expert?</h3>
+                        <p>We provide online instant cash loans with quick approval</p>
+                        <a href="{% url 'jobs:add_job' %}" class="boxed-btn3">Post a Job</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

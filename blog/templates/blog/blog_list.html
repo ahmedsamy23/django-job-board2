@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block body %}
+    <!-- bradcam_area -->
+    <div class="bradcam_area bradcam_bg_1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text text-center">
+                        <h3>{{ blogs.paginator.count }} Blog Posts</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ bradcam_area -->
+
+    <!-- Blog Area -->
+    <section class="blog_area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mb-5 mb-lg-0">
+                    <div class="blog_left_sidebar">
+                        {% for blog in blogs %}
+                        <article class="blog_item">
+                            <div class="blog_item_img">
+                                {% if blog.image %}
+                                <img class="card-img rounded-0" src="{{ blog.image.url }}" alt="{{ blog.title }}">
+                                {% endif %}
+                                <a href="#" class="blog_item_date">
+                                    <h3>{{ blog.published_at|date:"d" }}</h3>
+                                    <p>{{ blog.published_at|date:"M" }}</p>
+                                </a>
+                            </div>
+                            <div class="blog_details">
+                                <a class="d-inline-block" href="{% url 'blog:blog_detail' blog.slug %}">
+                                    <h2>{{ blog.title }}</h2>
+                                </a>
+                                <p>{{ blog.body|truncatewords:20 }}</p>
+                                <ul class="blog-info-link">
+                                    <li><a href="#"><i class="fa fa-user"></i> {{ blog.author }}</a></li>
+                                    <li><a href="{% url 'blog:blog_detail' blog.slug %}#comments-area"><i class="fa fa-comments"></i> {{ blog.blog_comment.count }} Comments</a></li>
+                                </ul>
+                            </div>
+                        </article>
+                        {% empty %}
+                        <p class="text-center">No blog posts available.</p>
+                        {% endfor %}
+
+                        <!-- Pagination -->
+                        {% if blogs.has_other_pages %}
+                        <nav class="blog-pagination justify-content-center d-flex">
+                            <ul class="pagination">
+                                {% if blogs.has_previous %}
+                                <li class="page-item"><a class="page-link" href="?page={{ blogs.previous_page_number }}">«</a></li>
+                                {% endif %}
+                                {% for i in blogs.paginator.page_range %}
+                                <li class="page-item {% if blogs.number == i %}active{% endif %}">
+                                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                                </li>
+                                {% endfor %}
+                                {% if blogs.has_next %}
+                                <li class="page-item"><a class="page-link" href="?page={{ blogs.next_page_number }}">»</a></li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <div class="blog_right_sidebar">
+                        <aside class="single_sidebar_widget search_widget">
+                            <form method="GET" action="{% url 'blog:blog_list' %}">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="q" placeholder="Search Blogs"
+                                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Blogs'"
+                                               value="{{ myfilter.form.q.value|default_if_none:'' }}">
+                                        <div class="input-group-append">
+                                            <button class="btn" type="submit"><i class="ti-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="id_author__username">Author</label>
+                                    <input type="text" class="form-control" name="author__username" id="id_author__username"
+                                           placeholder="Author" value="{{ myfilter.form.author__username.value|default_if_none:'' }}">
+                                </div>
+                                <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit">Search</button>
+                            </form>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock body %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block body %}
+    <!-- bradcam_area -->
+    <div class="bradcam_area bradcam_bg_1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text">
+                        <h3>Edit Blog: {{ blog.title }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ bradcam_area -->
+
+    <!-- Edit Blog Section -->
+    <section class="blog_area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mb-5 mb-lg-0">
+                    <div class="blog_left_sidebar">
+                        <article class="blog_item">
+                            <div class="blog_details">
+                                <h2>Edit Your Blog Post</h2>
+                                <form method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {% bootstrap_form form %}
+                                    <div class="form-group mt-4">
+                                        <button type="submit" class="boxed-btn3">Save Changes</button>
+                                        <a href="{% url 'blog:blog_detail' slug=blog.slug %}" class="boxed-btn3" style="background: transparent; color: #00D363; border: 1px solid #00D363;">Cancel</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock body %}

@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block body %}
+    <!-- bradcam_area -->
+    <div class="bradcam_area bradcam_bg_1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text">
+                        <h3>{{blog.title}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ bradcam_area -->
+
+    <!-- Blog Area -->
+    <section class="blog_area single-post-area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 posts-list">
+                    <div class="single-post">
+                        <div class="feature-img blog_item_img">
+                            {% if blog.image %}
+                            <img class="img-fluid" src="{{ blog.image.url }}" alt="{{ blog.title }}">
+                            {% endif %}
+                        </div>
+                        <div class="blog_details">
+                            <h2>{{ blog.title }}</h2>
+                            <ul class="blog-info-link mt-3 mb-4">
+                                <li><a href="#"><i class="fa fa-user"></i> {{ blog.author }}</a></li>
+                                <li><a href="#comments-area"><i class="fa fa-comments"></i> {{ comments.count }} Comments</a></li>
+                                {% if request.user == blog.author %}
+                                    <li><a href="{% url 'blog:edit_blog' slug=blog.slug %}" class="text-success"><i class="fa fa-edit"></i> Edit Blog</a></li>
+                                {% endif %}
+                            </ul>
+                            <p>{{ blog.body|linebreaks }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Top (Share Section) -->
+                    <div class="navigation-top">
+                        <div class="d-sm-flex justify-content-between text-center">
+                            <p class="like-info"><span class="align-middle"><i class="fa fa-heart"></i></span> Share this post</p>
+                            <div class="col-sm-4 text-center my-2 my-sm-0"></div>
+                            <ul class="social-icons">
+                                <li><a href="https://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://www.twitter.com"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="https://www.google.com"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="https://www.linkedin.com"><i class="fa fa-envelope"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Comments Area -->
+                    <div class="comments-area" id="comments-area">
+                        <h4>{{ comments.count }} Comments</h4>
+                        {% for comment in comments %}
+                        <div class="comment-list">
+                            <div class="single-comment justify-content-between d-flex">
+                                <div class="user justify-content-between d-flex">
+                                    <div class="thumb">
+                                        {% if comment.user.profile.image %}
+                                            <img src="{{ comment.user.profile.image.url }}" alt="{{ comment.user.username }}">
+                                        {% else %}
+                                            <img src="{% static 'img/comment/comment_4.png' %}" alt="comment.user.username ">
+                                        {% endif %}
+                                    </div>
+                                    <div class="desc">
+                                        <p class="comment">{{ comment.comment }}</p>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <h5><a href="#">{{ comment.user.username }}</a></h5>
+                                                <p class="date">{{ comment.created_at|date:"d M Y" }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <p class="text-center">No comments yet.</p>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Comment Form -->
+                    <div class="comment-form">
+                        <h4>Leave a Reply</h4>
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <textarea class="form-control w-100" name="comment" id="commentBox" cols="30" rows="9" placeholder="Write Comment" oninput="autoResize(this)"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="boxed-btn3">Post Comment</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript for Auto-Expanding Comment Box -->
+    <script>
+        function autoResize(textarea) {
+            textarea.style.height = "auto";
+            textarea.style.height = (textarea.scrollHeight) + "px";
+        }
+    </script>
+{% endblock body %}

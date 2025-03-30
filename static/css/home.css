@@ -1,0 +1,112 @@
+/* تنسيق الحاوية التي تحتوي على الصورة */
+.thumb {
+    width: 100px; /* عرض المربع */
+    height: 100px; /* ارتفاع المربع */
+    overflow: hidden; /* إخفاء أي جزء زائد من الصورة */
+    border-radius: 8px; /* زوايا دائرية */
+    display: flex; /* لمحاذاة الصورة */
+    justify-content: center; /* محاذاة أفقية في المنتصف */
+    align-items: center; /* محاذاة عمودية في المنتصف */
+    background-color: #e0e0e0; /* لون خلفية في حالة وجود فراغات */
+    border: 1px solid #ccc; /* حدود خفيفة لتوضيح المربع */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* ظل خفيف لتحسين المظهر */
+}
+
+/* تنسيق الصورة داخل المربع */
+.job-image {
+    width: 100%; /* ملء عرض الحاوية */
+    height: 100%; /* ملء ارتفاع الحاوية */
+    object-fit: cover; /* ملء الحاوية مع قص الأجزاء الزائدة */
+    object-position: center; /* محاذاة الصورة في المنتصف */
+    transition: transform 0.3s ease-in-out; /* تأثير انتقال سلس عند التكبير */
+}
+
+/* تأثير عند التمرير بالماوس */
+.job-image:hover {
+    transform: scale(1.05); /* تكبير الصورة قليلاً عند التمرير */
+}
+
+/* تنسيق البطاقة الكاملة (اختياري لتحسين المظهر) */
+.single_jobs {
+    padding: 15px; /* حشوة داخلية */
+    margin-bottom: 20px; /* مسافة بين البطاقات */
+    border-radius: 10px; /* زوايا دائرية للبطاقة */
+    background-color: #fff; /* خلفية بيضاء */
+    transition: box-shadow 0.3s ease; /* تأثير انتقال للظل */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* ظل افتراضي */
+}
+
+/* تأثير عند التمرير على البطاقة */
+.single_jobs:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* ظل أكبر عند التمرير */
+}
+
+/* تنسيق النصوص داخل البطاقة (اختياري) */
+.jobs_conetent h4 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #191d34; /* مطابق للون العناوين في style.css */
+}
+
+.jobs_conetent p {
+    font-size: 14px;
+    color: #7A838B; /* مطابق للون النصوص في style.css */
+    margin-bottom: 10px;
+}
+
+/* تنسيق الشارات (Badges) */
+.badge {
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 12px;
+}
+
+.badge-success {
+    background-color: #00D363; /* لون أخضر مطابق للتصميم */
+    color: #fff;
+}
+
+.badge-warning {
+    background-color: #ffc107; /* لون أصفر لـ Part Time */
+    color: #000;
+}
+
+/* تنسيق زر Apply Now */
+.jobs_right .apply_now .boxed-btn3 {
+    background-color: #00D363; /* لون أخضر مطابق للتصميم */
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    border: 1px solid transparent; /* مطابق لـ boxed-btn3 في style.css */
+}
+
+.jobs_right .apply_now .boxed-btn3:hover {
+    background-color: #ffffff; /* لون أغمق عند التمرير */
+    color: #fff;
+    border: 1px solid #00D363; /* مطابق لـ boxed-btn3 في style.css */
+}
+
+/* تنسيق النص في jobs_right */
+.jobs_right p {
+    font-size: 12px;
+    color: #7A838B; /* مطابق للون النصوص في style.css */
+    margin-top: 5px;
+}
+
+
+.job_lists .single_jobs .jobs_left .thumb,
+.job_details_area .single_jobs .jobs_left .thumb {
+    width: 130px; /* 100px للصورة + 15px padding لكل جانب */
+    height: 130px;
+    padding: 15px;
+}
+
+.job_lists .single_jobs .jobs_left .thumb img,
+.job_details_area .single_jobs .jobs_left .thumb img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}

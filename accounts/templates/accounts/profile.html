@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block body %}
+
+    <!-- CSS هنا -->
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    
+    <!-- عنوان الصفحة -->
+    <div class="bradcam_area bradcam_bg_1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text">
+                        <h3>Profile</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- محتوى الصفحة -->
+    <div class="job_details_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="job_sumary">
+                        <div class="summery_header">
+                            <h3>Profile Summary</h3>
+                        </div>
+                        <div class="job_content">
+                            <ul>
+                                <li>Name: <span>{{ profile.user.username }}</span></li>
+                                <li>Email: <span>{{ profile.user.email }}</span></li>
+                                <li>Phone: <span>{{ profile.phone_number }}</span></li>
+                                <li>Address: <span>{{ profile.city }}</span></li>
+                            </ul>
+                        </div>
+                        <div class="p-5">
+                            <a class="boxed-btn3 w-100" href="{% url 'accounts:profile_edit' %}">Edit Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Favourites Section -->
+{% endblock %}
